@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel=stylesheet type=text/css>
+    <link href="{{ url_for('static', filename='styles.css') }}" rel=stylesheet type=text/css>
+
+    <link href="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" rel=script>
+
+
+</head>
+<body>
+<div class="container">
+    <div class="col">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <h1 class="title_text">Colour Palette Generator</h1>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <div class="mb-3">
+
+                    <form enctype=multipart/form-data method=post>
+                        <label class="form-label" for="formFile">Choose a picture to analyse</label>
+                        <input class="form-control" id="formFile" name=file type="file">
+                        <div class="d-grid gap-2">
+                            <input class="btn btn-primary" type=submit value=Upload>
+                        </div>
+                    </form>
+
+                </div>
+                <p>
+                    Note:
+                    My fantastic app is a bit slow to analyse larger images or images with high-res.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="container">
+        {% for colour_index in range(colours|length) %}
+        <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-3 hex_card">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src=""
+                             style="background-color: {{ colours[colour_index] }};padding: 3rem;">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ colours[colour_index] }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 hex_card">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src=""
+                             style="background-color: {{ colours[colour_index+1] }};padding: 3rem;">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ colours[colour_index+1] }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 hex_card">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src=""
+                             style="background-color: {{ colours[colour_index+1] }};padding: 3rem;">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ colours[colour_index+2] }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 hex_card">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src=""
+                             style="background-color: {{ colours[colour_index+1] }};padding: 3rem;">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ colours[colour_index+3] }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>
